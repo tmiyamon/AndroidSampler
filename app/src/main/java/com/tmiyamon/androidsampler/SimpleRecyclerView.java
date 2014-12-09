@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -41,6 +42,7 @@ public class SimpleRecyclerView extends RecyclerView {
     }
 
     public void init() {
+        setAdapter(new Adapter());
         setLayoutManager(new LinearLayoutManager(getContext()));
         setItemAnimator(new DefaultItemAnimator());
         setHasFixedSize(true);
@@ -57,7 +59,10 @@ public class SimpleRecyclerView extends RecyclerView {
 
     public void initAdapter(List<ListItem> listItems) {
         this.listItems = listItems;
-        setAdapter(new Adapter(this.listItems));
+
+        Adapter adapter = ((Adapter)this.getAdapter());
+        adapter.setItems(this.listItems);
+        adapter.notifyDataSetChanged();
     }
 
     public void setListener(MainFragment.OnFragmentInteractionListener listener) {
@@ -79,11 +84,7 @@ public class SimpleRecyclerView extends RecyclerView {
     }
 
     public class Adapter extends RecyclerView.Adapter<ViewHolder> {
-        List<ListItem> items;
-
-        public Adapter(List<ListItem> items) {
-            this.items = items;
-        }
+        List<ListItem> items = new ArrayList<>();
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -102,7 +103,12 @@ public class SimpleRecyclerView extends RecyclerView {
         public int getItemCount() {
             return items.size();
         }
+
+        public void setItems(List<ListItem> items) {
+            this.items = items;
+        }
     }
+
 
     public static class ItemClickDetector implements RecyclerView.OnItemTouchListener {
         private OnItemClickListener listener;

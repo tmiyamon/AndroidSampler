@@ -2,7 +2,9 @@ package com.tmiyamon.androidsampler;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -11,6 +13,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 
 public class MainActivity extends ActionBarActivity
         implements MainFragment.OnFragmentInteractionListener {
@@ -18,10 +23,18 @@ public class MainActivity extends ActionBarActivity
     public static final String ASSET_FILE_NAME = "fragments";
 //    public static final String KEY_FRAGMENT = "fragments";
 
+
+    @InjectView(R.id.tool_bar)
+    Toolbar toolbar;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.inject(this);
+
+        setSupportActionBar(toolbar);
 
         ArrayList<String> fragments = getFragmentClassNames(ASSET_FILE_NAME);
 
@@ -29,6 +42,15 @@ public class MainActivity extends ActionBarActivity
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, MainFragment.newInstance(fragments))
                     .commit();
+
+            getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+                @Override
+                public void onBackStackChanged() {
+                    getSupportActionBar().setDisplayHomeAsUpEnabled(
+                            getSupportFragmentManager().getBackStackEntryCount() > 0);
+                }
+            });
+
         }
     }
 
@@ -76,7 +98,9 @@ public class MainActivity extends ActionBarActivity
         try {
             getSupportFragmentManager()
                     .beginTransaction()
+                    .setCustomAnimations(R.anim.abc_fade_in, 0, 0, R.anim.abc_fade_out)
                     .replace(R.id.container, fragmentClass.newInstance())
+                    .addToBackStack(null)
                     .commit();
         } catch (InstantiationException e) {
             e.printStackTrace();
