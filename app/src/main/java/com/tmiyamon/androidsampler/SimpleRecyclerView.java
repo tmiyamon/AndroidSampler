@@ -143,8 +143,6 @@ public class SimpleRecyclerView extends RecyclerView {
     }
 
     public static class ListItem {
-        public static final String FIELD_APP_NAME = "APP_NAME";
-        public static final String FIELD_APP_DESCRIPTION = "APP_DESCRIPTION";
 
         Class<? extends Fragment> fragmentClass;
         String fragmentClassName;
@@ -155,8 +153,8 @@ public class SimpleRecyclerView extends RecyclerView {
             this.fragmentClassName = fragmentClassName;
             this.fragmentClass = Class.forName(fragmentClassName).asSubclass(Fragment.class);
 
-            this.name = buildValueFromFragment(FIELD_APP_NAME, this.fragmentClassName);
-            this.description = buildValueFromFragment(FIELD_APP_DESCRIPTION, "");
+            this.name = buildValueFromFragment(AppActivity.FIELD_APP_NAME, this.fragmentClassName);
+            this.description = buildValueFromFragment(AppActivity.FIELD_APP_DESCRIPTION, "");
         }
 
 
