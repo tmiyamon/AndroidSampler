@@ -100,6 +100,4 @@ public class MainFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         public void onFragmentInteraction(Class<? extends Fragment> fragmentClass);
     }
-
-
 }
