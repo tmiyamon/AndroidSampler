@@ -1,7 +1,6 @@
 package com.tmiyamon.androidsampler;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -50,7 +49,7 @@ public class SimpleRecyclerView extends RecyclerView {
             @Override
             public void onItemClick(View view, int position) {
                 if (listener != null) {
-                    listener.onFragmentInteraction(listItems.get(position).fragmentClass);
+                    listener.onFragmentInteraction(listItems.get(position).fragmentManager.getFragmentClass());
                 }
             }
         }));
@@ -95,8 +94,8 @@ public class SimpleRecyclerView extends RecyclerView {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             ListItem item = items.get(position);
-            holder.name.setText(item.name);
-            holder.description.setText(item.description);
+            holder.name.setText(item.fragmentManager.getTitle());
+            holder.description.setText(item.fragmentManager.getDescription());
         }
 
         @Override
@@ -143,30 +142,12 @@ public class SimpleRecyclerView extends RecyclerView {
     }
 
     public static class ListItem {
-
-        Class<? extends Fragment> fragmentClass;
-        String fragmentClassName;
-        String name;
-        String description;
+        FragmentManager fragmentManager;
 
         public ListItem(String fragmentClassName) throws ClassNotFoundException {
-            this.fragmentClassName = fragmentClassName;
-            this.fragmentClass = Class.forName(fragmentClassName).asSubclass(Fragment.class);
-
-            this.name = buildValueFromFragment(AppActivity.FIELD_APP_NAME, this.fragmentClassName);
-            this.description = buildValueFromFragment(AppActivity.FIELD_APP_DESCRIPTION, "");
+            fragmentManager = FragmentManager.forClassName(fragmentClassName);
         }
 
 
-        private String buildValueFromFragment(String fieldName, String defaultValue) {
-            try {
-                return (String)this.fragmentClass.getField(fieldName).get(null);
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
-            }
-            return defaultValue;
-        }
     }
 }

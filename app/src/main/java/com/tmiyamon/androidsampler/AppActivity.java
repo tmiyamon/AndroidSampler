@@ -1,7 +1,6 @@
 package com.tmiyamon.androidsampler;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -26,24 +25,22 @@ public class AppActivity extends ActionBarActivity {
 
         try {
             String fragmentName = getIntent().getStringExtra(KEY_FRAGMENT);
-            Class<? extends Fragment> fragmentClass = Class.forName(fragmentName).asSubclass(Fragment.class);
+            FragmentManager fragmentManager = FragmentManager.forClassName(fragmentName);
 
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.container, fragmentClass.newInstance())
+                    .add(R.id.container, fragmentManager.getFragmentClass().newInstance())
                     .commit();
 
-            toolbar.setTitle((String)fragmentClass.getField("APP_NAME").get(null));
+            toolbar.setTitle(fragmentManager.getTitle());
+
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
         }
-
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
