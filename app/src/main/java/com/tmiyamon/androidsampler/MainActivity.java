@@ -23,8 +23,8 @@ import butterknife.InjectView;
 
 
 public class MainActivity extends ActionBarActivity {
-    public static final String ASSET_FILE_NAME = "fragment";
-    public static final String KEY_FRAGEMENT = "fragment";
+    public static final String ASSET_FILE_NAME = "fragments";
+    public static final String KEY_FRAGEMENT = "fragments";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,8 +126,12 @@ public class MainActivity extends ActionBarActivity {
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder {
-            @InjectView(R.id.textView)
-            TextView textView;
+            @InjectView(R.id.name)
+            TextView name;
+
+            @InjectView(R.id.description)
+            TextView description;
+
 
             public ViewHolder(View itemView) {
                 super(itemView);
@@ -150,7 +154,9 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public void onBindViewHolder(ViewHolder holder, int position) {
-                holder.textView.setText(items.get(position).text);
+                ListItem item = items.get(position);
+                holder.name.setText(item.name);
+                holder.description.setText(item.description);
             }
 
             @Override
@@ -160,12 +166,32 @@ public class MainActivity extends ActionBarActivity {
         }
 
         public class ListItem {
-            String text;
+            public static final String FIELD_APP_NAME = "APP_NAME";
+            public static final String FIELD_APP_DESCRIPTION = "APP_DESCRIPTION";
+
             Class<?> fragmentClass;
+            String fragmentClassName;
+            String name;
+            String description;
 
             public ListItem(String fragmentClassName) throws ClassNotFoundException {
-                this.text = fragmentClassName;
+                this.fragmentClassName = fragmentClassName;
                 this.fragmentClass = Class.forName(fragmentClassName);
+
+                this.name = buildValueFromFragment(FIELD_APP_NAME, this.fragmentClassName);
+                this.description = buildValueFromFragment(FIELD_APP_DESCRIPTION, "");
+            }
+
+
+            private String buildValueFromFragment(String fieldName, String defaultValue) {
+                try {
+                    return (String)this.fragmentClass.getField(fieldName).get(null);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (NoSuchFieldException e) {
+                    e.printStackTrace();
+                }
+                return defaultValue;
             }
         }
     }
