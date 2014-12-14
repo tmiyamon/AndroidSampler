@@ -33,7 +33,7 @@ dependencies {
     def fragments = modules.collect({
         it.fileTree(
             dir: 'src/main/java',
-            includes: ["**/MainFragment.java"]
+            includes: ["**/MainFragment.java", "**/MainActivity.java"]
         ).getFiles().collect {
             it.getAbsolutePath().find(/^.+src\/main\/java\/(.+)\.java$/) {
                 it[1].replaceAll('/','.')
@@ -41,7 +41,7 @@ dependencies {
         }
     }).flatten()
 
-    file('src/main/assets/fragments').withWriter { out ->
+    file('src/main/assets/targets').withWriter { out ->
         fragments.each() {
             out.writeLine(it)
         }

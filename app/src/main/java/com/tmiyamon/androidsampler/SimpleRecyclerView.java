@@ -49,7 +49,7 @@ public class SimpleRecyclerView extends RecyclerView {
             @Override
             public void onItemClick(View view, int position) {
                 if (listener != null) {
-                    listener.onFragmentInteraction(listItems.get(position).fragmentManager.getFragmentClass());
+                    listener.onFragmentInteraction(listItems.get(position).target.getClassName());
                 }
             }
         }));
@@ -94,8 +94,8 @@ public class SimpleRecyclerView extends RecyclerView {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             ListItem item = items.get(position);
-            holder.name.setText(item.fragmentManager.getTitle());
-            holder.description.setText(item.fragmentManager.getDescription());
+            holder.name.setText(item.target.getTitle());
+            holder.description.setText(item.target.getDescription());
         }
 
         @Override
@@ -142,10 +142,10 @@ public class SimpleRecyclerView extends RecyclerView {
     }
 
     public static class ListItem {
-        FragmentManager fragmentManager;
+        Target target;
 
         public ListItem(String fragmentClassName) throws ClassNotFoundException {
-            fragmentManager = FragmentManager.forClassName(fragmentClassName);
+            target = Target.forClassName(fragmentClassName);
         }
 
 

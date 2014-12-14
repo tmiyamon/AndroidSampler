@@ -24,19 +24,19 @@ import butterknife.InjectView;
  * create an instance of this fragment.
  */
 public class MainFragment extends Fragment {
-    public static final String ARG_KEY_FRAGMENTS = "fragments";
+    public static final String ARG_KEY_TARGETS = "fragments";
 
     @InjectView(R.id.recyclerView)
     SimpleRecyclerView simpleRecyclerView;
 
-    private List<String> fragmentClassNames;
+    private List<String> targetClassNames;
     private OnFragmentInteractionListener listener;
 
-    public static MainFragment newInstance(ArrayList<String> fragments) {
+    public static MainFragment newInstance(ArrayList<String> targets) {
         MainFragment fragment = new MainFragment();
 
         Bundle args = new Bundle();
-        args.putStringArrayList(ARG_KEY_FRAGMENTS, fragments);
+        args.putStringArrayList(ARG_KEY_TARGETS, targets);
         fragment.setArguments(args);
 
         return fragment;
@@ -48,9 +48,9 @@ public class MainFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            this.fragmentClassNames = getArguments().getStringArrayList(ARG_KEY_FRAGMENTS);
+            this.targetClassNames = getArguments().getStringArrayList(ARG_KEY_TARGETS);
         } else {
-            this.fragmentClassNames = Collections.emptyList();
+            this.targetClassNames = Collections.emptyList();
         }
     }
 
@@ -61,16 +61,16 @@ public class MainFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.inject(this, rootView);
 
-        initRecyclerView(this.fragmentClassNames);
+        initRecyclerView(this.targetClassNames);
 
         return rootView;
     }
 
     void initRecyclerView(List<String> items) {
         final List<SimpleRecyclerView.ListItem> listItems = new ArrayList<>(items.size());
-        for (String fragmentClassName : items) {
+        for (String targetClassName : items) {
             try {
-                listItems.add(new SimpleRecyclerView.ListItem(fragmentClassName));
+                listItems.add(new SimpleRecyclerView.ListItem(targetClassName));
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
@@ -98,6 +98,6 @@ public class MainFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        public void onFragmentInteraction(Class<? extends Fragment> fragmentClass);
+        public void onFragmentInteraction(String targetClassName);
     }
 }
