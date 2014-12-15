@@ -1,4 +1,3 @@
-com.tmiyamon.androidsampler.accountmanager.MainFragment
 com.tmiyamon.androidsampler.fragmenttabhost.MainFragment
-com.tmiyamon.androidsampler.login.MainFragment
+com.tmiyamon.androidsampler.login.MainActivity
 com.tmiyamon.androidsampler.viewpager.MainFragment
