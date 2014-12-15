@@ -26,5 +26,12 @@ public interface ParseService {
 
     @POST("/1/users")
     @Headers("Content-Type: application/json")
-    Map<String, String> signup(@Body Map<String, String> body);
+    Map<String, String> signup(
+            @Body Map<String, String> body);
+
+    @POST("/1/users")
+    @Headers("Content-Type: application/json")
+    void signup(
+            @Body Map<String, String> body,
+            Callback<Map<String, String>> callback);
 }

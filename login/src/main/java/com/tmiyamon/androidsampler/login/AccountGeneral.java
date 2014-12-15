@@ -1,5 +1,8 @@
 package com.tmiyamon.androidsampler.login;
 
+import android.content.Intent;
+import android.os.Bundle;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Udini
@@ -28,4 +31,9 @@ public class AccountGeneral {
     public static final String AUTHTOKEN_TYPE_FULL_ACCESS_LABEL = "Full access to an Udinic account";
 
     public static final ServerAuthenticate sServerAuthenticate = new ParseComServerAuthenticate();
+
+    public static interface OnAuthListener {
+        public void onSwitch(Class<? extends AuthFragment> fragment, Bundle bundle);
+        public void onAuthFinished(Intent intent);
+    }
 }

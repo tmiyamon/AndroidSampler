@@ -14,7 +14,7 @@ import android.os.Bundle;
  * It sends back to the Authenticator the result.
  */
 public class AuthenticatorActivity extends AccountAuthenticatorActivity
-        implements LoginFragment.OnAuthFinishListener {
+        implements AccountGeneral.OnAuthListener {
 
     public final static String ARG_ACCOUNT_TYPE = "ACCOUNT_TYPE";
     public final static String ARG_AUTH_TOKEN_TYPE = "AUTH_TYPE";
@@ -86,6 +86,23 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity
         finish();
     }
 
+    @Override
+    public void onSwitch(Class<? extends AuthFragment> fragment, Bundle args) {
+        try {
+
+            Fragment newFragment = fragment.newInstance();
+            newFragment.setArguments(args);
+
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.container, newFragment)
+                    .commit();
+
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
 
     //
 //
