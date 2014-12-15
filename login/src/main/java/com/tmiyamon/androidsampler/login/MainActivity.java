@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class MainActivity extends Activity implements OnReloadListener {
+    public static final String APP_NAME = "Login";
+    public static final String APP_DESCRIPTION = "A login sample using AccountManager and Parse";
 
     public static final String ACCOUNT_TYPE = "com.tmiyamon";
     public static final String AUTH_TOKEN_TYPE = "general";
