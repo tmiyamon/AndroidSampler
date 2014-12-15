@@ -13,6 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class MainActivity extends Activity implements OnReloadListener {
+
+    public static final String ACCOUNT_TYPE = "com.tmiyamon";
+    public static final String AUTH_TOKEN_TYPE = "general";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,17 +48,17 @@ public class MainActivity extends Activity implements OnReloadListener {
             View rootView = inflater.inflate(R.layout.fragment_login_main, container, false);
 
             final AccountManager accountManager = AccountManager.get(getActivity());
-            final Account[] accounts = accountManager.getAccountsByType(AccountGeneral.ACCOUNT_TYPE);
+            final Account[] accounts = accountManager.getAccountsByType(ACCOUNT_TYPE);
             if (accounts.length == 0) {
-                accountManager.addAccount(AccountGeneral.ACCOUNT_TYPE, AccountGeneral.AUTHTOKEN_TYPE_FULL_ACCESS, null, null, getActivity(), null, null);
+                accountManager.addAccount(ACCOUNT_TYPE, AUTH_TOKEN_TYPE, null, null, getActivity(), null, null);
             } else {
-                accountManager.getAuthToken(accounts[0], AccountGeneral.AUTHTOKEN_TYPE_FULL_ACCESS, null, getActivity(), null, null);
+                accountManager.getAuthToken(accounts[0], AUTH_TOKEN_TYPE, null, getActivity(), null, null);
             }
 
             rootView.findViewById(R.id.btnLogut).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    final Account account = accountManager.getAccountsByType(AccountGeneral.ACCOUNT_TYPE)[0];
+                    final Account account = accountManager.getAccountsByType(ACCOUNT_TYPE)[0];
                     accountManager.removeAccount(account, new AccountManagerCallback<Boolean>() {
                         @Override
                         public void run(AccountManagerFuture<Boolean> future) {

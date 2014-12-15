@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 public class AuthActivity extends AccountAuthenticatorActivity
-        implements AccountGeneral.OnAuthListener {
+        implements OnAuthListener {
 
     public final static String ARG_ACCOUNT_TYPE = "ACCOUNT_TYPE";
     public final static String ARG_AUTH_TOKEN_TYPE = "AUTH_TYPE";

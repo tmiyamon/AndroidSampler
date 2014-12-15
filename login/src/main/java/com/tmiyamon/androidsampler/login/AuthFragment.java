@@ -18,13 +18,13 @@ import retrofit.client.Response;
  * Created by tmiyamon on 12/16/14.
  */
 public class AuthFragment extends Fragment {
-    protected AccountGeneral.OnAuthListener listener;
+    protected OnAuthListener listener;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        if (activity instanceof AccountGeneral.OnAuthListener) {
-            this.listener = (AccountGeneral.OnAuthListener) activity;
+        if (activity instanceof OnAuthListener) {
+            this.listener = (OnAuthListener) activity;
         }
     }
 
