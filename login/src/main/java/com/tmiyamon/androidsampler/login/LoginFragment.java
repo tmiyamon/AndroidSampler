@@ -56,7 +56,7 @@ public class LoginFragment extends AuthFragment {
         final String name = accountName.getText().toString();
         final String password = accountPassword.getText().toString();
 
-        ParseComServerAuthenticate.parse.login(
+        ParseClient.instance.login(
                 name, password,
                 new AuthCallback(name, password, accountType, authTokenType, isNewAccount));
     }

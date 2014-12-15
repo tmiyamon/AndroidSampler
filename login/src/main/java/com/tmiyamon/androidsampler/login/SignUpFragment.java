@@ -13,7 +13,6 @@ import java.util.Map;
  * Created by tmiyamon on 12/16/14.
  */
 public class SignUpFragment extends AuthFragment {
-    private TextView accountLabel;
     private TextView accountName;
     private TextView accountPassword;
 
@@ -29,7 +28,6 @@ public class SignUpFragment extends AuthFragment {
 
         View rootView = inflater.inflate(R.layout.fragment_login_signup, container, false);
 
-        accountLabel = ((TextView) rootView.findViewById(R.id.name));
         accountName = ((TextView) rootView.findViewById(R.id.accountName));
         accountPassword = ((TextView) rootView.findViewById(R.id.accountPassword));
 
@@ -58,7 +56,7 @@ public class SignUpFragment extends AuthFragment {
         body.put("username", name);
         body.put("password", password);
 
-        ParseComServerAuthenticate.parse.signup(
+        ParseClient.instance.signup(
                 body, new AuthCallback(name, password, accountType, authTokenType, false));
     }
 

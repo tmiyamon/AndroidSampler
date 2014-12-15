@@ -10,8 +10,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 
-import static com.tmiyamon.androidsampler.login.AccountGeneral.sServerAuthenticate;
-
 public class AccountAuthenticator extends AbstractAccountAuthenticator {
 
     private final Context context;
@@ -58,7 +56,7 @@ public class AccountAuthenticator extends AbstractAccountAuthenticator {
             final String password = accountManager.getPassword(account);
             if (password != null) {
                 try {
-                    authToken = sServerAuthenticate.userSignIn(account.name, password, authTokenType);
+                    authToken = ParseClient.instance.login(account.name, password).get("sessionToken");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
