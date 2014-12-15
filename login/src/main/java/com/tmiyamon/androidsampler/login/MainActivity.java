@@ -4,8 +4,6 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AccountManagerCallback;
 import android.accounts.AccountManagerFuture;
-import android.accounts.AuthenticatorException;
-import android.accounts.OperationCanceledException;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
@@ -13,8 +11,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import java.io.IOException;
 
 public class MainActivity extends Activity implements OnReloadListener {
     @Override
@@ -59,21 +55,10 @@ public class MainActivity extends Activity implements OnReloadListener {
                 @Override
                 public void onClick(View v) {
                     final Account account = accountManager.getAccountsByType(AccountGeneral.ACCOUNT_TYPE)[0];
-                    accountManager.getAuthToken(account, AccountGeneral.AUTHTOKEN_TYPE_FULL_ACCESS, null, getActivity(), new AccountManagerCallback<Bundle>() {
+                    accountManager.removeAccount(account, new AccountManagerCallback<Boolean>() {
                         @Override
-                        public void run(AccountManagerFuture<Bundle> future) {
-                            try {
-                                final String authToken = future.getResult().getString(AccountManager.KEY_AUTHTOKEN);
-                                accountManager.invalidateAuthToken(account.type, authToken);
-                                accountManager.clearPassword(account);
-                                listener.onReload();
-                            } catch (OperationCanceledException e) {
-                                e.printStackTrace();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            } catch (AuthenticatorException e) {
-                                e.printStackTrace();
-                            }
+                        public void run(AccountManagerFuture<Boolean> future) {
+                            listener.onReload();
                         }
                     }, null);
                 }
