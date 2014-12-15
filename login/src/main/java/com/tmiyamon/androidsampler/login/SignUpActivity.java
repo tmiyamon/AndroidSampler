@@ -5,14 +5,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import static com.tmiyamon.androidsampler.login.AccountGeneral.*;
-import static android.accounts.AccountManager.*;
-import static com.tmiyamon.androidsampler.login.AuthenticatorActivity.*;
+import static android.accounts.AccountManager.KEY_ERROR_MESSAGE;
+import static com.tmiyamon.androidsampler.login.AccountGeneral.sServerAuthenticate;
+import static com.tmiyamon.androidsampler.login.AuthenticatorActivity.ARG_ACCOUNT_TYPE;
+import static com.tmiyamon.androidsampler.login.AuthenticatorActivity.PARAM_USER_PASS;
 
 /**
  * In charge of the Sign up process. Since it's not an AuthenticatorActivity decendent,
@@ -29,10 +29,9 @@ public class SignUpActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login_register);
 
         mAccountType = getIntent().getStringExtra(ARG_ACCOUNT_TYPE);
-
-        setContentView(R.layout.activity_login_register);
 
         findViewById(R.id.alreadyMember).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,9 +49,6 @@ public class SignUpActivity extends Activity {
     }
 
     private void createAccount() {
-
-        // Validation!
-
         new AsyncTask<String, Void, Intent>() {
 
             String name = ((TextView) findViewById(R.id.name)).getText().toString().trim();
@@ -61,9 +57,6 @@ public class SignUpActivity extends Activity {
 
             @Override
             protected Intent doInBackground(String... params) {
-
-                Log.d("udinic", TAG + "> Started authenticating");
-
                 String authtoken = null;
                 Bundle data = new Bundle();
                 try {

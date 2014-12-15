@@ -18,23 +18,20 @@ public class ParseComServerAuthenticate implements ServerAuthenticate{
     public static final String APPLICATION_ID = "BdQge5lVtYOuhjUbAKB4jFxxYreoisSPbWSKGCTo";
     public static final String REST_API_KEY = "JkGJpaJUOnfTK5nYmfBL1fLTgKM7Dm0fGMMTyE9o";
 
-    private RestAdapter restAdapter;
-    private ParseService parse;
+    private static RestAdapter restAdapter =
+            new RestAdapter.Builder()
+                .setEndpoint("https://api.parse.com")
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .setRequestInterceptor(new RequestInterceptor() {
+                    @Override
+                    public void intercept(RequestFacade request) {
+                        request.addHeader("X-Parse-Application-Id", APPLICATION_ID);
+                        request.addHeader("X-Parse-REST-API-Key", REST_API_KEY);
+                    }
+                })
+                .build();
 
-    public ParseComServerAuthenticate() {
-        restAdapter = new RestAdapter.Builder()
-                        .setEndpoint("https://api.parse.com")
-                        .setLogLevel(RestAdapter.LogLevel.FULL)
-                        .setRequestInterceptor(new RequestInterceptor() {
-                            @Override
-                            public void intercept(RequestFacade request) {
-                                request.addHeader("X-Parse-Application-Id", APPLICATION_ID);
-                                request.addHeader("X-Parse-REST-API-Key", REST_API_KEY);
-                            }
-                        })
-                        .build();
-        parse = restAdapter.create(ParseService.class);
-    }
+    public static ParseService parse = restAdapter.create(ParseService.class);
 
     @Override
     public String userSignUp(String name, String email, String pass, String authType) throws Exception {
