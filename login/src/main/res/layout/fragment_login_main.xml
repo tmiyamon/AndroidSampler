@@ -5,27 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button android:id="@+id/btnAddAccount"
+    <Button android:id="@+id/btnLogut"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:text="addAccount"/>
-
-    <Button android:id="@+id/btnGetAuthToken"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="getAuthToken"/>
-
-    <Button android:id="@+id/btnGetAuthTokenConvenient"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="getAuthTokenByFeatures"/>
-
-    <Button android:id="@+id/btnInvalidateAuthToken"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="invalidateAuthToken"/>
+        android:text="Logout"/>
 </LinearLayout>

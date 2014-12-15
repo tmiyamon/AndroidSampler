@@ -51,7 +51,7 @@ public class MainActivity extends Activity implements OnReloadListener {
                 accountManager.getAuthToken(accounts[0], AccountGeneral.AUTHTOKEN_TYPE_FULL_ACCESS, null, getActivity(), null, null);
             }
 
-            rootView.findViewById(R.id.btnInvalidateAuthToken).setOnClickListener(new View.OnClickListener() {
+            rootView.findViewById(R.id.btnLogut).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     final Account account = accountManager.getAccountsByType(AccountGeneral.ACCOUNT_TYPE)[0];
