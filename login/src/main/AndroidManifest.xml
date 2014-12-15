@@ -5,7 +5,7 @@
         android:label="@string/app_name"
         android:icon="@drawable/ic_launcher">
         <activity android:name="com.tmiyamon.androidsampler.login.MainActivity"> </activity>
-        <activity android:name="com.tmiyamon.androidsampler.login.AuthenticatorActivity" android:label="@string/login_label"/>
+        <activity android:name=".AuthActivity" android:label="@string/login_label"/>
         <service android:name=".AuthenticatorService">
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator" />

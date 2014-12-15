@@ -67,7 +67,7 @@ public class AuthFragment extends Fragment {
             data.putString(AccountManager.KEY_ACCOUNT_NAME, name);
             data.putString(AccountManager.KEY_ACCOUNT_TYPE, accountType);
             data.putString(AccountManager.KEY_AUTHTOKEN, authToken);
-            data.putString(AuthenticatorActivity.PARAM_USER_PASS, password);
+            data.putString(AuthActivity.PARAM_USER_PASS, password);
 
             final Intent intent = new Intent();
             intent.putExtras(data);

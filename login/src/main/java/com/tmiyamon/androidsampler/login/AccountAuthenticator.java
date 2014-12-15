@@ -20,11 +20,11 @@ public class AccountAuthenticator extends AbstractAccountAuthenticator {
     }
 
     private Bundle buildBundleForAuthActivity(String accountName, String accountType, String authTokenType, boolean isNewAccount, AccountAuthenticatorResponse response) {
-        final Intent intent = new Intent(context, AuthenticatorActivity.class);
-        intent.putExtra(AuthenticatorActivity.ARG_ACCOUNT_NAME, accountName);
-        intent.putExtra(AuthenticatorActivity.ARG_ACCOUNT_TYPE, accountType);
-        intent.putExtra(AuthenticatorActivity.ARG_AUTH_TOKEN_TYPE, authTokenType);
-        intent.putExtra(AuthenticatorActivity.ARG_IS_ADDING_NEW_ACCOUNT, isNewAccount);
+        final Intent intent = new Intent(context, AuthActivity.class);
+        intent.putExtra(AuthActivity.ARG_ACCOUNT_NAME, accountName);
+        intent.putExtra(AuthActivity.ARG_ACCOUNT_TYPE, accountType);
+        intent.putExtra(AuthActivity.ARG_AUTH_TOKEN_TYPE, authTokenType);
+        intent.putExtra(AuthActivity.ARG_IS_ADDING_NEW_ACCOUNT, isNewAccount);
         intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
 
         final Bundle bundle = new Bundle();

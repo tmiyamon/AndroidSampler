@@ -25,10 +25,10 @@ public class LoginFragment extends AuthFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         Bundle args = getArguments();
-        String accountName = args.getString(AuthenticatorActivity.ARG_ACCOUNT_NAME);
-        this.accountType = args.getString(AuthenticatorActivity.ARG_ACCOUNT_TYPE);
-        this.authTokenType = args.getString(AuthenticatorActivity.ARG_AUTH_TOKEN_TYPE);
-        this.isNewAccount = args.getBoolean(AuthenticatorActivity.ARG_IS_ADDING_NEW_ACCOUNT, false);
+        String accountName = args.getString(AuthActivity.ARG_ACCOUNT_NAME);
+        this.accountType = args.getString(AuthActivity.ARG_ACCOUNT_TYPE);
+        this.authTokenType = args.getString(AuthActivity.ARG_AUTH_TOKEN_TYPE);
+        this.isNewAccount = args.getBoolean(AuthActivity.ARG_IS_ADDING_NEW_ACCOUNT, false);
 
         View rootView = inflater.inflate(R.layout.fragment_login_login, container, false);
         this.accountName = (TextView)rootView.findViewById(R.id.accountName);

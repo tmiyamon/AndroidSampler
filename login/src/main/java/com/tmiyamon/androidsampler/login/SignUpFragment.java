@@ -23,8 +23,8 @@ public class SignUpFragment extends AuthFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         Bundle args = getArguments();
-        accountType = args.getString(AuthenticatorActivity.ARG_ACCOUNT_TYPE);
-        authTokenType = args.getString(AuthenticatorActivity.ARG_AUTH_TOKEN_TYPE);
+        accountType = args.getString(AuthActivity.ARG_ACCOUNT_TYPE);
+        authTokenType = args.getString(AuthActivity.ARG_AUTH_TOKEN_TYPE);
 
         View rootView = inflater.inflate(R.layout.fragment_login_signup, container, false);
 

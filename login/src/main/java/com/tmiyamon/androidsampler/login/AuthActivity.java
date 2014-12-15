@@ -5,7 +5,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 
-public class AuthenticatorActivity extends AccountAuthenticatorActivity
+public class AuthActivity extends AccountAuthenticatorActivity
         implements AccountGeneral.OnAuthListener {
 
     public final static String ARG_ACCOUNT_TYPE = "ACCOUNT_TYPE";
@@ -18,7 +18,7 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_login);
+        setContentView(R.layout.activity_login_container);
 
         Fragment loginFragment = new LoginFragment();
         loginFragment.setArguments(getIntent().getExtras());
