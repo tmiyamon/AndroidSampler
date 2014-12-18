@@ -1,1 +1,1 @@
-include ':app', ':fragmenttabhost', ':viewpager', ':login'
+include ':app', ':fragmenttabhost', ':viewpager', ':login', ':toolbar'

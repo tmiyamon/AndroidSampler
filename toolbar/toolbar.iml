@@ -3,7 +3,7 @@
   <component name="FacetManager">
     <facet type="android-gradle" name="Android-Gradle">
       <configuration>
-        <option name="GRADLE_PROJECT_PATH" value=":fragmenttabhost" />
+        <option name="GRADLE_PROJECT_PATH" value=":toolbar" />
       </configuration>
     </facet>
     <facet type="android" name="Android">

@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 21
-    buildToolsVersion "21.0.2"
+    buildToolsVersion "21.1.1"
 
     defaultConfig {
         minSdkVersion 15
@@ -10,7 +10,18 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
+
+
     buildTypes {
+        debug {
+            minifyEnabled false
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -20,5 +31,15 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('org.robolectric:robolectric:2.4') {
+        exclude module: 'commons-logging'
+        exclude module: 'httpclient'
+    }
+    androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.2.+'
     compile 'com.android.support:appcompat-v7:21.0.2'
+    compile 'com.squareup.retrofit:retrofit:1.8.+'
+    compile 'com.squareup.picasso:picasso:2.4.+'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.4.+'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.4.+'
+    compile 'com.fasterxml.jackson.core:jackson-annotations:2.4.+'
 }
