@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$/login" />
             <option value="$PROJECT_DIR$/loginfacebook" />
             <option value="$PROJECT_DIR$/navdrawer" />
+            <option value="$PROJECT_DIR$/recyclerview" />
             <option value="$PROJECT_DIR$/toolbar" />
             <option value="$PROJECT_DIR$/viewpager" />
           </set>
