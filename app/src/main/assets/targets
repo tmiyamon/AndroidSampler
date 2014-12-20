@@ -1,5 +1,6 @@
 com.tmiyamon.androidsampler.fragmenttabhost.MainFragment
 com.tmiyamon.androidsampler.login.MainActivity
+com.kawaii.androidsampler.loginfacebook.fragments.MainFragment
 com.kawaii.androidsampler.navdrawer.MainActivity
 com.kawaii.androidsampler.toolbar.MainActivity
 com.tmiyamon.androidsampler.viewpager.MainFragment
