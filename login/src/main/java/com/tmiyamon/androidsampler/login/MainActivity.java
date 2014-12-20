@@ -13,10 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class MainActivity extends Activity implements OnReloadListener {
-    public static final String APP_NAME = "Login";
-    public static final String APP_DESCRIPTION = "A login sample using AccountManager and Parse";
+    public static final String APP_NAME = "Login Parse";
+    public static final String APP_DESCRIPTION = "A login sample using AccountManager for Parse REST-API";
 
-    public static final String ACCOUNT_TYPE = "com.tmiyamon";
+    public static final String ACCOUNT_TYPE = "com.tmiyamon.parse";
     public static final String AUTH_TOKEN_TYPE = "general";
 
     @Override
@@ -37,6 +37,19 @@ public class MainActivity extends Activity implements OnReloadListener {
         startActivity(intent);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        final AccountManager accountManager = AccountManager.get(this);
+        final Account[] accounts = accountManager.getAccountsByType(ACCOUNT_TYPE);
+        if (accounts.length == 0) {
+            accountManager.addAccount(ACCOUNT_TYPE, AUTH_TOKEN_TYPE, null, null, this, null, null);
+        } else {
+            accountManager.getAuthToken(accounts[0], AUTH_TOKEN_TYPE, null, this, null, null);
+        }
+    }
+
     /**
      * Created by tmiyamon on 12/16/14.
      */
@@ -49,19 +62,11 @@ public class MainActivity extends Activity implements OnReloadListener {
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_login_main, container, false);
 
-            final AccountManager accountManager = AccountManager.get(getActivity());
-            final Account[] accounts = accountManager.getAccountsByType(ACCOUNT_TYPE);
-            if (accounts.length == 0) {
-                accountManager.addAccount(ACCOUNT_TYPE, AUTH_TOKEN_TYPE, null, null, getActivity(), null, null);
-            } else {
-                accountManager.getAuthToken(accounts[0], AUTH_TOKEN_TYPE, null, getActivity(), null, null);
-            }
-
             rootView.findViewById(R.id.btnLogut).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    final Account account = accountManager.getAccountsByType(ACCOUNT_TYPE)[0];
-                    accountManager.removeAccount(account, new AccountManagerCallback<Boolean>() {
+                    final Account account = AccountManager.get(getActivity()).getAccountsByType(ACCOUNT_TYPE)[0];
+                    AccountManager.get(getActivity()).removeAccount(account, new AccountManagerCallback<Boolean>() {
                         @Override
                         public void run(AccountManagerFuture<Boolean> future) {
                             listener.onReload();
