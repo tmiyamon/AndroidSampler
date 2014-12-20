@@ -1,1 +1,1 @@
-include ':app', ':fragmenttabhost', ':viewpager', ':login', ':toolbar', ':navdrawer', ':loginfacebook', ':recyclerview'
+include ':app', ':fragmenttabhost', ':viewpager', ':login', ':toolbar', ':navdrawer', ':loginfacebook', ':recyclerview', ':cardview'

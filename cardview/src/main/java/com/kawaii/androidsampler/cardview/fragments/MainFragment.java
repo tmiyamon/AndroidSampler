@@ -1,4 +1,4 @@
-package com.kawaii.androidsampler.recyclerview.fragments;
+package com.kawaii.androidsampler.cardview.fragments;
 
 
 import android.os.Bundle;
@@ -10,15 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.kawaii.androidsampler.recyclerview.R;
+import com.kawaii.androidsampler.cardview.R;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class MainFragment extends Fragment {
-    public static final String APP_NAME = "RecyclerView";
-    public static final String APP_DESCRIPTION = "A RecyclerView sample with LinearLayout";
+    public static final String APP_NAME = "CardView";
+    public static final String APP_DESCRIPTION = "A CardView sample with RecyclerView";
 
     private String[] items;
 
@@ -33,7 +33,7 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_recyclerview_main, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_cardview_main, container, false);
 
         RecyclerView recyclerView = (RecyclerView)rootView.findViewById(R.id.recycler_view);
         recyclerView.setAdapter(new Adapter(items));
@@ -52,7 +52,7 @@ public class MainFragment extends Fragment {
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recyclerview_main, parent, false);
+            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cardview_main, parent, false);
             return new ViewHolder(itemView);
         }
 
@@ -75,4 +75,5 @@ public class MainFragment extends Fragment {
             this.textView = (TextView)itemView.findViewById(R.id.text_view);
         }
     }
+
 }
