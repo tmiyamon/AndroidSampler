@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/camera/camera.iml" filepath="$PROJECT_DIR$/camera/camera.iml" />
       <module fileurl="file://$PROJECT_DIR$/cardview/cardview.iml" filepath="$PROJECT_DIR$/cardview/cardview.iml" />
       <module fileurl="file://$PROJECT_DIR$/fragmenttabhost/fragmenttabhost.iml" filepath="$PROJECT_DIR$/fragmenttabhost/fragmenttabhost.iml" />
+      <module fileurl="file://$PROJECT_DIR$/imageview/imageview.iml" filepath="$PROJECT_DIR$/imageview/imageview.iml" />
       <module fileurl="file://$PROJECT_DIR$/login/login.iml" filepath="$PROJECT_DIR$/login/login.iml" />
       <module fileurl="file://$PROJECT_DIR$/loginfacebook/loginfacebook.iml" filepath="$PROJECT_DIR$/loginfacebook/loginfacebook.iml" />
       <module fileurl="file://$PROJECT_DIR$/navdrawer/navdrawer.iml" filepath="$PROJECT_DIR$/navdrawer/navdrawer.iml" />

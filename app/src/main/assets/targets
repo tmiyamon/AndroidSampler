@@ -1,6 +1,7 @@
 com.tmiyamon.androidsampler.camera.fragments.MainFragment
 com.kawaii.androidsampler.cardview.fragments.MainFragment
 com.tmiyamon.androidsampler.fragmenttabhost.MainFragment
+com.kawaii.androidsampler.imageview.MainFragment
 com.tmiyamon.androidsampler.login.MainActivity
 com.kawaii.androidsampler.loginfacebook.fragments.MainFragment
 com.kawaii.androidsampler.navdrawer.MainActivity
