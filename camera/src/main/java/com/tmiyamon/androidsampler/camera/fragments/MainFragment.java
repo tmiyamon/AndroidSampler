@@ -22,8 +22,7 @@ public class MainFragment extends Fragment {
     public static final String APP_NAME = "Camera";
     public static final String APP_DESCRIPTION = "A camera sample";
 
-
-    private Camera camera;
+    protected Camera camera;
 
     public MainFragment() { }
 
@@ -35,6 +34,18 @@ public class MainFragment extends Fragment {
         SurfaceView surfaceView = (SurfaceView) rootView.findViewById(R.id.surface_view);
         SurfaceHolder holder = surfaceView.getHolder();
         holder.addCallback(new SurfaceHolderCallback(camera));
+
+        rootView.findViewById(R.id.btnShot).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                camera.takePicture(null, null, new Camera.PictureCallback() {
+                    @Override
+                    public void onPictureTaken(byte[] data, Camera camera) {
+                        camera.startPreview();
+                    }
+                });
+            }
+        });
 
         return rootView;
     }
@@ -77,6 +88,9 @@ public class MainFragment extends Fragment {
 
         @Override
         public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+            camera.stopPreview();
+            camera.setDisplayOrientation(90);
+            camera.startPreview();
         }
 
         @Override
